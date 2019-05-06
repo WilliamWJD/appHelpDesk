@@ -1,11 +1,24 @@
 <?php
 	
-	print_r($_POST);
+	$usuario_autenticado=false;
 
-	echo '<br/>';
+	//relação de usuarios do sistema
+	$usuarios=array(
+		array('email'=>'admin@admin.com.br', 'senha'=>'admin'),
+		array('email'=>'user@user.com.br', 'senha'=>'user'),
+	);
+	
 
-	echo $_POST['email'];
-	echo '<br/>';
-	echo $_POST['senha'];
+	foreach ($usuarios as $user) {
+		if($user['email']==$_POST['email'] && $user['senha']==$_POST['senha']){
+			$usuario_autenticado=true;
+		}
+	}if($usuario_autenticado){
+		echo "Autenticado com sucesso";
+	}else{
+		header('Location: index.php?login=erro');
+	}
+
+
 
 ?>
