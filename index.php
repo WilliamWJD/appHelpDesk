@@ -47,6 +47,13 @@
                   </div>
                 <? } ?>
 
+                <!--verifica se um determinado indice esta setado-->
+                <? if(isset($_GET['login'])&& $_GET['login']=='erro2'){?>
+                  <div class="text-danger">
+                    Faça login antes de acessar as paginas protegidas !
+                  </div>
+                <? } ?>
+
                 <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
               </form>
             </div>
