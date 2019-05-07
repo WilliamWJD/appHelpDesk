@@ -1,22 +1,16 @@
 <?require_once"validador_acesso.php"?>
 
-<?php
-  
+<?php 
   //declarando array de chamados
   $chamados=array();
-
-
   $arquivo=fopen('arquivo.txt', 'r');
-
   //FEOF TESTA PELO FIM DE UM ARQUIVO, PERCORRE UM DETERMINADO ARQUIVO ATÉ QUE ELA IDENTIFICA O FIM DO ARQUIVO
   while (!feof($arquivo)) {
     $registro=fgets($arquivo);
     //POPULANDO ARRAY COM OS REGISTROS DO ARQUIVO TXT
     $chamados[]=$registro;   
   }
-
   fclose($arquivo);
-
 ?>
 
 <html>
@@ -64,15 +58,26 @@
                 <!-- TRANSFORMA CADA POSIÇÃO DEPOIS DO # EM UM INDICE DE ARRAY -->
                 <?php
                   $chamado_dados=explode('#', $chamado);
+
+                  //VERIFICA PERFIL DO USUÁRIO PARA RELAR O FILTRO
+                  if($_SESSION['perfil_id']==2){
+                    //EXIBIR CHAMADOS QUE FORAM CRIADOS PELOS USUÁRIO QUE ESTÁ LOGADO
+                    if($_SESSION['id'] != $chamado_dados[0]){
+                      continue;
+                    }
+                  }else{
+                    //EXIBE TODOS OS CHAMADOS
+                  }
+
                   if(count($chamado_dados)<3){
                     continue;
                   }
                 ?>
                 <div class="card mb-3 bg-light">
                   <div class="card-body">
-                    <h5 class="card-title"><?=$chamado_dados[0]?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?=$chamado_dados[1]?></h6>
-                    <p class="card-text"><?=$chamado_dados[2]?></p>
+                    <h5 class="card-title"><?=$chamado_dados[1]?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?=$chamado_dados[2]?></h6>
+                    <p class="card-text"><?=$chamado_dados[3]?></p>
 
                   </div>
                 </div>

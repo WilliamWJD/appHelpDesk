@@ -1,3 +1,5 @@
-Notebook não liga#Hardware#asdas
-asdasdas#Software#asdasasdas
-BlueScreen maquina#Hardware#asdasasdasasdas
+3#Notebook não liga#Hardware#asdas
+3#Impressão falhando#Impressora#asdas
+3#BlueScreen maquina#Hardware#asdas
+2#BlueScreen maquina#Impressora#asdas
+4#Impressão falhando#Impressora#asdas
