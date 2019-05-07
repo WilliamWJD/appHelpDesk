@@ -1,5 +1,24 @@
 <?require_once"validador_acesso.php"?>
 
+<?php
+  
+  //declarando array de chamados
+  $chamados=array();
+
+
+  $arquivo=fopen('arquivo.txt', 'r');
+
+  //FEOF TESTA PELO FIM DE UM ARQUIVO, PERCORRE UM DETERMINADO ARQUIVO ATÉ QUE ELA IDENTIFICA O FIM DO ARQUIVO
+  while (!feof($arquivo)) {
+    $registro=fgets($arquivo);
+    //POPULANDO ARRAY COM OS REGISTROS DO ARQUIVO TXT
+    $chamados[]=$registro;   
+  }
+
+  fclose($arquivo);
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -40,24 +59,24 @@
             </div>
             
             <div class="card-body">
-              
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
+              <!--LOOP --> 
+              <? foreach($chamados as $chamado) { ?>               
+                <!-- TRANSFORMA CADA POSIÇÃO DEPOIS DO # EM UM INDICE DE ARRAY -->
+                <?php
+                  $chamado_dados=explode('#', $chamado);
+                  if(count($chamado_dados)<3){
+                    continue;
+                  }
+                ?>
+                <div class="card mb-3 bg-light">
+                  <div class="card-body">
+                    <h5 class="card-title"><?=$chamado_dados[0]?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?=$chamado_dados[1]?></h6>
+                    <p class="card-text"><?=$chamado_dados[2]?></p>
 
+                  </div>
                 </div>
-              </div>
-
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+              <? } ?>
 
               <div class="row mt-5">
                 <div class="col-6">
