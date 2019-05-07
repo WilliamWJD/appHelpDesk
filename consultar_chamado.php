@@ -7,8 +7,23 @@
   //FEOF TESTA PELO FIM DE UM ARQUIVO, PERCORRE UM DETERMINADO ARQUIVO ATÉ QUE ELA IDENTIFICA O FIM DO ARQUIVO
   while (!feof($arquivo)) {
     $registro=fgets($arquivo);
-    //POPULANDO ARRAY COM OS REGISTROS DO ARQUIVO TXT
-    $chamados[]=$registro;   
+
+    //DETALHAMENTO DO REGISTRO
+    $detalheRegistro=explode('#', $registro);
+
+    if($_SESSION['perfil_id']==2){
+      if($_SESSION['id'] != $detalheRegistro[0]){
+        continue;
+      }else{
+        //POPULANDO ARRAY COM OS REGISTROS DO ARQUIVO TXT
+        $chamados[]=$registro;
+      }
+    }else{
+      //POPULANDO ARRAY COM OS REGISTROS DO ARQUIVO TXT
+      $chamados[]=$registro;
+    }
+
+       
   }
   fclose($arquivo);
 ?>
@@ -58,16 +73,6 @@
                 <!-- TRANSFORMA CADA POSIÇÃO DEPOIS DO # EM UM INDICE DE ARRAY -->
                 <?php
                   $chamado_dados=explode('#', $chamado);
-
-                  //VERIFICA PERFIL DO USUÁRIO PARA RELAR O FILTRO
-                  if($_SESSION['perfil_id']==2){
-                    //EXIBIR CHAMADOS QUE FORAM CRIADOS PELOS USUÁRIO QUE ESTÁ LOGADO
-                    if($_SESSION['id'] != $chamado_dados[0]){
-                      continue;
-                    }
-                  }else{
-                    //EXIBE TODOS OS CHAMADOS
-                  }
 
                   if(count($chamado_dados)<3){
                     continue;

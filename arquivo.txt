@@ -3,3 +3,4 @@
 3#BlueScreen maquina#Hardware#asdas
 2#BlueScreen maquina#Impressora#asdas
 4#Impressão falhando#Impressora#asdas
+2#teste chamado user#Software#asdas
